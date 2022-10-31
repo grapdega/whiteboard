@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="ui" type="Node2D"]
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+visible = false
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 314.0
+margin_bottom = 461.0
+hsv_mode = true
+presets_enabled = false
+presets_visible = false
