@@ -38,6 +38,6 @@ func _draw():
 	if _curve != null:
 		for _c in _curve:
 			draw_polyline(_c.get_baked_points(),Color.white,2.0,true)
-		for _c in state:
-			draw_polyline(_c.get_baked_points(),Color.white,2.0,true)
+		for _c in state.keys():
+			draw_polyline(state[_c].get_baked_points(),Color.white,2.0,true)
 
