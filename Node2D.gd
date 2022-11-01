@@ -9,12 +9,12 @@ var _curve = null
 var lastpos = null
 
 func _input(event:InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
 		_pressed = event.pressed
 		if _pressed:
 			_curve.append(Curve2D.new())
 			lastpos = null
-	if event is InputEventMouseMotion && _pressed:
+	if (event is InputEventMouseMotion or event is InputEventScreenDrag) && _pressed:
 		var epos = event.position
 		if lastpos != null:
 			epos.x = (lastpos.x + epos.x) /2
