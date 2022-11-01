@@ -15,7 +15,7 @@ func _input(event:InputEvent) -> void:
 	if  event is InputEventScreenTouch:
 		_pressed = event.pressed
 		if event.pressed: # Down.
-			var cur = preload("res://CurveLine.gd").new()
+			var cur = preload("res://script/CurveLine.gd").new()
 			cur.size = size
 			cur.color = color
 			cur.pressed = true
@@ -33,7 +33,7 @@ func _input(event:InputEvent) -> void:
 	if event is InputEventMouseButton:
 		_pressed = event.pressed
 		if _pressed:
-			var cur = preload("res://CurveLine.gd").new()
+			var cur = preload("res://script/CurveLine.gd").new()
 			cur.size = size
 			cur.color = color
 			cur.pressed = true
