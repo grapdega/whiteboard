@@ -1,43 +1,61 @@
 extends Node2D
 
+export var size = 1.9
+export var color = Color.white
+
 func _ready():
-	_curve = []
 	get_tree().get_root().set_transparent_background(true)
 
 var _pressed := false
-var _curve = null
-var lastpos = null
+var _curve = []
 var state = {}
 func _input(event:InputEvent) -> void:
+	update()
+	# Tocuh screen
 	if  event is InputEventScreenTouch:
 		_pressed = event.pressed
 		if event.pressed: # Down.
-			state[event.index] = Curve2D.new()
+			var cur = preload("res://CurveLine.gd").new()
+			cur.size = size
+			cur.color = color
+			cur.pressed = true
+			state[event.index] = cur
 		else: # Up.
+			state[event.index].pressed = false
 			_curve.append(state[event.index])
 			state.erase(event.index)
-
-	elif event is InputEventMouseButton:
+	if event is InputEventScreenDrag:
+		if state[event.index].pressed:
+			state[event.index].add(event.position)
+			return
+	
+	# mouse
+	if event is InputEventMouseButton:
 		_pressed = event.pressed
 		if _pressed:
-			_curve.append(Curve2D.new())
-			lastpos = null
-	if _pressed:
-		if event is InputEventScreenDrag:
-			state[event.index].add_point(event.position)
-		elif event is InputEventMouseMotion:
-			var epos = event.position
-			if lastpos != null:
-				epos.x = (lastpos.x + epos.x) /2
-				epos.y = (lastpos.y + epos.y) /2
-			lastpos = event.position
-			_curve[-1].add_point(epos)
-	update()
+			var cur = preload("res://CurveLine.gd").new()
+			cur.size = size
+			cur.color = color
+			cur.pressed = true
+			_curve.append(cur)
+		else:
+			_curve[-1].pressed = false
+	if event is InputEventMouseMotion:
+		if len(_curve) == 0:
+			return
+		if _curve[-1].pressed:
+			_curve[-1].add(event.position)
+			return
 
 func _draw():
+	var cur = null
 	if _curve != null:
 		for _c in _curve:
-			draw_polyline(_c.get_baked_points(),Color.white,2.0,true)
+			cur = _c
+			if cur.pget().size() >= 2:
+				draw_polyline(cur.pget(),cur.color,_c.size,true)
 		for _c in state.keys():
-			draw_polyline(state[_c].get_baked_points(),Color.white,2.0,true)
+			cur = state[_c]
+			if cur.pget().size() >= 2:
+				draw_polyline(cur.pget(),cur.color,_c.size,true)
 

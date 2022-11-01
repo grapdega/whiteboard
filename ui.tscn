@@ -27,10 +27,10 @@ __meta__ = {
 
 [node name="ColorPicker" type="ColorPicker" parent="."]
 visible = false
-margin_left = 22.0
-margin_top = 21.0
-margin_right = 330.0
-margin_bottom = 477.0
+margin_left = 26.0
+margin_top = 25.0
+margin_right = 334.0
+margin_bottom = 481.0
 hsv_mode = true
 presets_enabled = false
 presets_visible = false
@@ -47,7 +47,6 @@ z_index = 1
 texture = ExtResource( 3 )
 
 [node name="Draw2" type="Sprite" parent="Draw"]
-scale = Vector2( 1, 1 )
 z_index = 1
 texture = ExtResource( 3 )
 
