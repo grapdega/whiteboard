@@ -57,5 +57,5 @@ func _draw():
 		for _c in state.keys():
 			cur = state[_c]
 			if cur.pget().size() >= 2:
-				draw_polyline(cur.pget(),cur.color,_c.size,true)
+				draw_polyline(cur.pget(),cur.color,cur.size,true)
 
