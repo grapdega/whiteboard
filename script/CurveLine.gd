@@ -6,14 +6,19 @@ export var color = Color.black
 
 export var pressed = false
 
-var lastpos = null
+export var mode = "spline"
+
+export var begin = Vector2.ZERO
+export var end = Vector2.ZERO
+
 
 func pget():
 	return get_baked_points()
 
 func add(pos):
-	if lastpos != null:
-		pos.x = (lastpos.x*3 + pos.x) /4
-		pos.y = (lastpos.y*3 + pos.y) /4
-	lastpos = pos
-	add_point(pos)
+	if mode == "spline":
+		add_point(pos,Vector2.UP,Vector2.LEFT)
+	else:
+		if begin == Vector2.ZERO:
+			begin = pos
+		end = pos
