@@ -14,7 +14,7 @@ var update_request = false
 
 func create_cur():
 	var cur = preload("res://script/CurveLine.gd").new()
-	cur.size = size
+	cur.set_size(size)
 	cur.color = color
 	cur.pressed = true
 	cur.mode = mode
@@ -60,6 +60,12 @@ func _physics_process(delta):
 		mode = "spline"
 	if Input.is_key_pressed(KEY_C):
 		mode = "circle"
+	if Input.is_key_pressed(KEY_1):
+		size += 1
+	if Input.is_key_pressed(KEY_2):
+		size -= 1
+		if size < 2:
+			size = 2
 
 func _draw():
 	var cur = null
@@ -72,13 +78,13 @@ func _draw():
 			_draw_common(cur)
 
 func _draw_common(cur):
-		if cur.mode == "line":
-			draw_line(cur.begin,cur.end,cur.color,5,true)
-		elif cur.mode == "circle":
-			draw_arc(cur.begin,calc_radius(cur.begin,cur.end),0,TAU,1024,cur.color,cur.size,true)
-		elif cur.mode == "spline":
-			if cur.pget().size() >= 2:
-				draw_polyline(cur.pget(),cur.color,cur.size,true)
-
+	if cur.mode == "line":
+		draw_line(cur.begin,cur.end,cur.color,cur.width,true)
+	elif cur.mode == "circle":
+		draw_arc(cur.begin,calc_radius(cur.begin,cur.end),0,TAU,4096,cur.color,cur.width,true)
+	elif cur.mode == "spline":
+		remove_child(_curve[-1])
+		add_child(_curve[-1])
+	
 func calc_radius(a,b):
 	return b.y-a.y
