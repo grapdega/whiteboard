@@ -49,6 +49,16 @@ func _input(event:InputEvent) -> void:
 		if _curve[-1].pressed:
 			_curve[-1].add(get_global_mouse_position())
 			update_request = true
+		_delete_event(_curve)
+
+func _delete_event(_curve):
+	# FIXME: implement for line and circle
+	if mode == "delete":
+		for _c in _curve:
+			if not _c.removed:
+				if _c.detect_line(get_global_mouse_position(),size*10):
+					_c.removed=true
+	
 
 func _physics_process(delta):
 	if update_request:
@@ -60,12 +70,14 @@ func _physics_process(delta):
 		mode = "spline"
 	if Input.is_key_pressed(KEY_C):
 		mode = "circle"
+	if Input.is_key_pressed(KEY_D):
+		mode = "delete"
 	if Input.is_key_pressed(KEY_1):
 		size += 1
 	if Input.is_key_pressed(KEY_2):
 		size -= 1
-		if size < 2:
-			size = 2
+	if size < 3:
+		size = 3
 
 func _draw():
 	var cur = null
@@ -79,12 +91,15 @@ func _draw():
 
 func _draw_common(cur):
 	if cur.mode == "line":
-		draw_line(cur.begin,cur.end,cur.color,cur.width,true)
+		if not cur.removed:
+			draw_line(cur.begin,cur.end,cur.color,cur.width,true)
 	elif cur.mode == "circle":
-		draw_arc(cur.begin,calc_radius(cur.begin,cur.end),0,TAU,4096,cur.color,cur.width,true)
+		if not cur.removed:
+			draw_arc(cur.begin,calc_radius(cur.begin,cur.end),0,TAU,4096,cur.color,cur.width,true)
 	elif cur.mode == "spline":
-		remove_child(_curve[-1])
-		add_child(_curve[-1])
+		remove_child(cur)
+		if not cur.removed:
+			add_child(cur)
 	
 func calc_radius(a,b):
 	return b.y-a.y
