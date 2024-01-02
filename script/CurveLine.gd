@@ -1,15 +1,15 @@
 extends AntialiasedLine2D
 
-export var color = Color.black
+@export var color = Color.BLACK
 
-export var pressed = false
+@export var pressed = false
 
-export var removed = false
+@export var removed = false
 
-export var mode = "spline"
+@export var mode = "spline"
 
-export var begin = Vector2.ZERO
-export var end = Vector2.ZERO
+@export var begin = Vector2.ZERO
+@export var end = Vector2.ZERO
 
 func set_size(size):
 	width = size

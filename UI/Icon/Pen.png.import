@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crp8kmp3ufgie"
-path="res://.godot/imported/Draw.svg-df0995bd0a8cbe167df35f23c175ab65.ctex"
+uid="uid://cdvagobd3kqqc"
+path="res://.godot/imported/Pen.png-018b2c85dba69cea74772c357449b796.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://UI/Icon/Draw.svg"
-dest_files=["res://.godot/imported/Draw.svg-df0995bd0a8cbe167df35f23c175ab65.ctex"]
+source_file="res://UI/Icon/Pen.png"
+dest_files=["res://.godot/imported/Pen.png-018b2c85dba69cea74772c357449b796.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

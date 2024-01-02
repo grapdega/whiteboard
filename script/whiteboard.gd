@@ -1,8 +1,8 @@
 extends Node2D
 
-export var size = 3
-export var color = Color.white
-export var mode = "curve"
+@export var size = 3
+@export var color = Color.WHITE
+@export var mode = "curve"
 
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
@@ -16,7 +16,7 @@ func create_cur():
 	var cur = preload("res://script/CurveLine.gd").new()
 	cur.set_size(size)
 	cur.color = color
-	cur.pressed = true
+	cur.button_pressed = true
 	cur.mode = mode
 	return cur
 
@@ -27,7 +27,7 @@ func _input(event:InputEvent) -> void:
 		if event.pressed: # Down.
 			state[event.index] = create_cur()
 		else: # Up.
-			state[event.index].pressed = false
+			state[event.index].button_pressed = false
 			_curve.append(state[event.index])
 			state.erase(event.index)
 	if event is InputEventScreenDrag:
@@ -42,7 +42,7 @@ func _input(event:InputEvent) -> void:
 		if _pressed:
 			_curve.append(create_cur())
 		else:
-			_curve[-1].pressed = false
+			_curve[-1].button_pressed = false
 	if event is InputEventMouseMotion:
 		if len(_curve) == 0:
 			return
@@ -92,7 +92,7 @@ func _draw():
 func _draw_common(cur):
 	if cur.mode == "line":
 		if not cur.removed:
-			draw_line(cur.begin,cur.end,cur.color,cur.width,true)
+			draw_line(cur.begin, cur.end, cur.color, cur.width)
 	elif cur.mode == "circle":
 		if not cur.removed:
 			draw_arc(cur.begin,calc_radius(cur.begin,cur.end),0,TAU,4096,cur.color,cur.width,true)
