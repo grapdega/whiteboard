@@ -46,6 +46,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_environment="res://default_env.tres"
 quality/filters/sharpen_intensity=1.0
 quality/driver/fallback_to_gles2=true
