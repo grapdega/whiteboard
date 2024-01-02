@@ -34,7 +34,7 @@ window/per_pixel_transparency/enabled=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/antialiased_line2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/advanced_radial_menu/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg")
 
 [gui]
 
